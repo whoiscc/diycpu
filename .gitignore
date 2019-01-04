@@ -1,0 +1,10 @@
+*.bak
+vsim.wlf
+*.mti
+*.bmp
+
+_info
+_vmake
+*.qdb
+*.qtl
+*.qpg

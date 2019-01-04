@@ -1,0 +1,99 @@
+/*
+esssesssssssssesssseeee_mm_aaa_jj
+(e)nable, (s)elect, (m)emory, (a)lu, (j)ump
+*/
+
+// fetch
+0xx00xx00010101xxx00010_00_001_01  // 0000, set MAR & set ALU flag (ADD) & 
+                                   // 0000, update PC
+
+// decode
+0xx00xxxxxxxxx0xxxx0100_01_xxx_10  // 0001, read RAM & update IR
+
+// lw(1), sw(1)
+0xx00xxx0000011xxx10000_00_001_10  // 0002, set ALU flag (ADD) & set MAR
+
+// lw(2)
+0xx00xxxxxxxxx0xxxx1000_01_xxx_01  // 0003, read RAM & update DR
+0xx0000xxxxxxx0000x0001_x0_xxx_00  // 0004, write REG
+
+// lui
+0xx0000xxxxxxx0001x0001_x0_xxx_00  // 0005, write REG
+
+// sw(2)
+0xx00xxxxxxxxx0xxxx0000_11_xxx_00  // 0006, write RAM
+
+// xori
+0xx0000x0001000010x0001_x0_100_00  // 0007, set ALU flag (XOR) & write REG
+
+// j
+00x00xx1xxxxxx0xxxx0010_x0_xxx_00  // 0008, update PC
+
+// R-R (except sra, srl, sll, mul, mulu, div, divu)
+0xx0001x0000000010x0001_x0_000_00  // 0009, set ALU flag (funct) & write REG
+
+// beq(1), bne(1)
+0xxx1xxx0000000xxxx0000_x0_xxx_10  // 0010, update RES_REG
+
+// bltz(1), blez(1), bgtz(1), bgez(1)
+0xxx1xxx0001010xxxx0000_x0_110_10  // 0011, set ALU flag (SLT) & update REG_REG
+
+// beq(2)
+0x110xx00011100xxxx0010_x0_001_00  // 0012, set ALU flag (ADD) & update PC
+
+// bltz(2), bne(3), bgez(3), blez(3), bgtz(3)
+0x010xx00011100xxxx0010_x0_001_00  // 0013, set ALU flag (ADD) & update PC
+
+// bne(2)
+0xxx1xxx0110110xxxx0000_x0_101_11  // 0014, set ALU flag (NOR) & update RES_REG
+
+// bgez(2)
+0xxx1xxx0101010xxxx0000_x0_101_11  // 0015, set ALU flag (NOR) & update RES_REG
+
+// blez(2)
+0xxx1xxx0100110xxxx0000_x0_010_11  // 0016, set ALU flag (OR) & update RES_REG
+
+// bgtz(2)
+0xxx1xxx0100110xxxx0000_x0_101_11  // 0017, set ALU flag (NOR) & update RES_REG
+
+// sra, srl, sll
+0xx0001x1000000010x0001_x0_000_00  // 0018, set ALU flag (funct) & write REG
+
+// jal
+00x00101xxxxxx0011x0011_x0_xxx_00  // 0019, update PC & write REG
+
+// jr
+01x00xx1xxxxxx0xxxx0010_x0_xxx_00  // 0020, update PC
+
+// mult, multu, div, divu
+1xx00xxx0000000xxxx0000_x0_000_00  // 0021, set ALU flag (funct) & write LOHI
+
+// mfhi
+0xx0001xxxxxxx0101x0001_x0_000_00  // 0022, write REG
+
+// mflo
+0xx0001xxxxxxx0100x0001_x0_000_00  // 0023, write REG
+
+// addiu
+0xx0000x0001000010x0001_x0_001_00  // 0024, set ALU flag (ADD) & write REG
+
+// addi
+0xx0000x0000010010x0001_x0_001_00  // 0025, set ALU flag (ADD) & write REG
+
+// slti
+0xx0000x0000010010x0001_x0_110_00  // 0026, set ALU flag (SLT) & write REG
+
+// sltiu
+0xx0000x0000010010x0001_x0_111_00  // 0027, set ALU flag (SLTU) & write REG
+
+// andi
+0xx0000x0001000010x0001_x0_010_00  // 0028, set ALU flag (AND) & write REG
+
+// ori
+0xx0000x0001000010x0001_x0_011_00  // 0029, set ALU flag (OR) & write REG
+
+// xori
+0xx0000x0001000010x0001_x0_011_00  // 0030, set ALU flag (XOR) & write REG
+
+// jalr
+01x00011xxxxxx0011x0011_x0_xxx_00  // 0031, update PC & write REG
